@@ -1,3 +1,6 @@
+![40WC0y4Je4G6zEsHUi67JGF87e3kg8ya.webp](https://cdn.nodeimage.com/i/40WC0y4Je4G6zEsHUi67JGF87e3kg8ya.webp)
+![S2r295X43Xz32OIeHJqOWtzELCi9VRMI.webp](https://cdn.nodeimage.com/i/S2r295X43Xz32OIeHJqOWtzELCi9VRMI.webp)
+
 # 彩虹外链网盘
 
 彩虹外链网盘，是一款PHP网盘与外链分享程序，支持所有格式文件的上传，可以生成文件外链、图片外链、音乐视频外链，生成外链同时自动生成相应的UBB代码和HTML代码，还可支持文本、图片、音乐、视频在线预览，这不仅仅是一个网盘，更是一个图床亦或是音乐在线试听网站。新版本支持对接阿里云OSS、腾讯云COS、华为云OBS、又拍云、七牛云等云存储，同时增加了图片违规检测功能。
