@@ -7,10 +7,10 @@ include SYSTEM_ROOT.'header.php';
 $csrf_token = md5(mt_rand(0,999).time());
 $_SESSION['csrf_token'] = $csrf_token;
 ?>
-<div class="container" id="app">
+<div class="container" id="app" style="max-width: 1180px; width: calc(100% - 30px); padding: 0;">
     <div class="row">
     
-      <div class="col-sm-9">
+      <div class="col-sm-12">
         <div class="well infobox" align="center" id="fileInput" :style="{background: background}">
         <div style="min-height:50px;">
             <div id="progressBar" v-if="showtype==1">
@@ -59,7 +59,7 @@ $_SESSION['csrf_token'] = $csrf_token;
         <br><br><br><br>
         </div>
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-12" style="margin-top: 20px;">
       <div class="panel panel-primary">
 <div class="panel-heading">
 <h3 class="panel-title"><i class="fa fa-exclamation-circle"></i> 上传提示</h3>

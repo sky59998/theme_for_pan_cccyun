@@ -41,23 +41,26 @@ if($conf['filesearch']==1 && $kw){
 
 include SYSTEM_ROOT.'header.php';
 ?>
-<div class="container">
-    <div class="well bs-component">
-        <h2><?php echo $htext?>
-        <?php if($conf['filesearch']==1){?><span class="searchbox">
-            <form class="form-inline" action="./" method="GET">
-                <?php if(isset($_GET['m'])){?><input name="m" type="hidden" value="<?php echo htmlspecialchars($_GET['m'])?>"><?php }?>
-				<input name="kw" class="form-control" type="search" placeholder="请输入搜索关键字" value="<?php echo $kw?>" required="">
-				<button class="btn btn-default btn-raised btn-sm" type="submit"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
-			</form>
-        </span><?php }?></h2>
+<div class="container" style="max-width: 1180px; width: calc(100% - 30px); padding: 0;">
+    <div class="well bs-component" style="background: transparent; border: none; box-shadow: none; padding: 0;">
+        <?php if($conf['filesearch']==1){?>
+        <div style="margin-bottom: 20px; display: flex; justify-content: flex-end;">
+            <span class="searchbox">
+                <form class="form-inline" action="./" method="GET" style="display: flex; gap: 10px;">
+                    <?php if(isset($_GET['m'])){?><input name="m" type="hidden" value="<?php echo htmlspecialchars($_GET['m'])?>"><?php }?>
+                    <input name="kw" class="form-control" type="search" placeholder="请输入搜索关键字" value="<?php echo $kw?>" required="" style="width: 250px;">
+                    <button class="btn btn-default btn-raised btn-sm" type="submit" style="margin: 0;"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
+                </form>
+            </span>
+        </div>
+        <?php }?>
         <div class="table-responsive">
        <table class="table table-striped table-hover filelist">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>操作</th>
                     <th>文件名</th>
+                    <th>操作</th>
                     <th>文件大小</th>
                     <th>文件格式</th>
                     <th>上传时间</th>
@@ -78,17 +81,19 @@ while($res = $rs->fetch())
 {
 	$fileurl = './down.php/'.$res['hash'].'.'.($res['type']?$res['type']:'file');
 	$viewurl = './file.php?hash='.$res['hash'];
-echo '<tr><td><b>'.$i++.'</b></td><td><a href="'.$fileurl.'">下载</a>｜<a href="'.$viewurl.'">查看</a></td><td><i class="fa '.type_to_icon($res['type']).' fa-fw"></i>'.$res['name'].'</td><td>'.size_format($res['size']).'</td><td><font color="blue">'.($res['type']?$res['type']:'未知').'</font></td><td>'.$res['addtime'].'</td><td>'.preg_replace('/\d+$/','*',$res['ip']).'</b></td></tr>';
+echo '<tr><td><b>'.$i++.'</b></td><td><i class="fa '.type_to_icon($res['type']).' fa-fw"></i>'.$res['name'].'</td><td><a href="'.$fileurl.'">下载</a>｜<a href="'.$viewurl.'">查看</a><span class="file-size-badge">'.size_format($res['size']).'</span></td><td>'.size_format($res['size']).'</td><td><font color="blue">'.($res['type']?$res['type']:'未知').'</font></td><td>'.$res['addtime'].'</td><td>'.preg_replace('/\d+$/','*',$res['ip']).'</b></td></tr>';
 }
 if($numrows == 0) echo '<tr><td colspan="7" align="center">还没上传过任何文件</td></tr>';
 ?>
             </tbody>
         </table>
         </div>
-        <div class="row">
-        <div class="col-md-6"><br>共有 <?php echo $numrows?> 个文件&nbsp;&nbsp;当前第 <?php echo $page?> 页，共 <?php echo $pages?> 页</div>
-        <div class="col-md-6"><nav>
-  <ul class="pagination pagination-sm" style="float:right;">
+        <div class="row" style="margin-top: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <div class="page-stats-badge" style="margin-bottom: 10px;">
+                <i class="fa fa-bar-chart"></i> 共有 <b><?php echo $numrows?></b> 个文件 <span class="divider"></span> 第 <b><?php echo $page?></b> / <?php echo $pages?> 页
+            </div>
+            <nav>
+                <ul class="pagination pagination-sm" style="margin: 0; display: flex; flex-wrap: wrap; justify-content: center;">
 <?php
 $first=1;
 $prev=$page-1;
@@ -106,7 +111,7 @@ $start=$page-10>1?$page-10:1;
 $end=$page+10<$pages?$page+10:$pages;
 for ($i=$start;$i<$page;$i++)
 echo '<li><a href="index.php?page='.$i.$link.'">'.$i .'</a></li>';
-echo '<li class="disabled"><a>'.$page.'</a></li>';
+echo '<li class="active"><a>'.$page.'</a></li>';
 for ($i=$page+1;$i<=$end;$i++)
 echo '<li><a href="index.php?page='.$i.$link.'">'.$i .'</a></li>';
 echo '';
@@ -119,9 +124,9 @@ echo '<li class="disabled"><a>&raquo;</a></li>';
 echo '<li class="disabled"><a>尾页</a></li>';
 }
 ?>
-  </ul>
-</nav></div>
-</div>
+                </ul>
+            </nav>
+        </div>
     </div>
 <?php include SYSTEM_ROOT.'footer.php';?>
 <?php if(!empty($conf['gonggao'])){?>

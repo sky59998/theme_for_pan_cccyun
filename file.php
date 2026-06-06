@@ -8,6 +8,7 @@ include SYSTEM_ROOT.'header.php';
 $csrf_token = md5(mt_rand(0,999).time());
 $_SESSION['csrf_token'] = $csrf_token;
 
+
 $hash = isset($_GET['hash'])?$_GET['hash']:exit("<script language='javascript'>window.location.href='./';</script>");
 $pwd = isset($_GET['pwd'])?$_GET['pwd']:null;
 $row = $DB->getRow("SELECT * FROM pre_file WHERE hash=:hash", [':hash'=>$hash]);
@@ -62,7 +63,7 @@ if($view_type == 'image'){
   }
 }
 ?>
-<div class="container">
+<div class="container" style="max-width: 1180px; width: calc(100% - 30px); padding: 0;">
     <div class="row">
 <?php
 if($row['pwd']!=null && $row['pwd']!=$pwd){ ?>
@@ -81,7 +82,7 @@ if($row['pwd']!=null && $row['pwd']!=$pwd){ ?>
 }
 
 ?>
-      <div class="col-sm-9">
+      <div class="col-sm-12">
 <div class="panel panel-primary">
 <div class="panel-heading">
 <h3 class="panel-title"><?php echo $title?></h3>
@@ -213,7 +214,7 @@ if($filetype==1){
           </div>
       </div>
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-12" style="margin-top: 20px;">
 <div class="panel panel-info">
 <div class="panel-heading">
 <h3 class="panel-title"><i class="fa fa-exclamation-circle"></i> 提示</h3>
@@ -222,7 +223,7 @@ if($filetype==1){
 <?php echo $conf['gg_file']?>
 </div>
 </div>
-<div class="panel panel-default hidden-xs">
+<div class="panel panel-default hidden-xs" style="margin-top: 20px;">
 <div class="panel-heading">
 <h3 class="panel-title"><i class="fa fa-qrcode"></i> 手机扫码下载</h3>
 </div>
